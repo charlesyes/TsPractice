@@ -1,6 +1,6 @@
 /// <reference path="scripts/typings/jquery/jquery.d.ts" />
-var TSPractice0906;
-(function (TSPractice0906) {
+var TSPractice;
+(function (TSPractice) {
     //#region Template
     var Template = (function () {
         function Template() {
@@ -11,29 +11,29 @@ var TSPractice0906;
         };
         return Template;
     }());
-    TSPractice0906.Template = Template;
+    TSPractice.Template = Template;
     //#endregion
     //#region Data
-    var TableContent = (function () {
-        function TableContent() {
+    var DataContent = (function () {
+        function DataContent() {
             this.Data = [];
         }
-        TableContent.prototype.AddData = function (p) {
+        DataContent.prototype.AddData = function (p) {
             this.Data.push(p);
         };
-        TableContent.prototype.GetData = function () {
+        DataContent.prototype.GetData = function () {
             return this.Data;
         };
-        return TableContent;
+        return DataContent;
     }());
-    TSPractice0906.TableContent = TableContent;
+    TSPractice.DataContent = DataContent;
     var Data = (function () {
         function Data() {
         }
-        Data.TableContent = new TableContent();
+        Data.DataContent = new DataContent();
         return Data;
     }());
-    TSPractice0906.Data = Data;
+    TSPractice.Data = Data;
     //#endregion
     //#region Form
     var FormCreate = (function () {
@@ -42,7 +42,7 @@ var TSPractice0906;
         FormCreate.prototype.GetForm = function () { return this.m_Target; };
         FormCreate.prototype.Create = function () {
             this.m_Target = $("#Formdiv");
-            var tmpDataCollect = TSPractice0906.Data.TableContent.GetData();
+            var tmpDataCollect = TSPractice.Data.DataContent.GetData();
             var tmpDataLength = tmpDataCollect.length;
             var tmpIdx;
             var tmpResult = "";
@@ -54,26 +54,21 @@ var TSPractice0906;
             var renderInput = Mustache.render(Template.TemplateInput, { inputID: 'inputID1' });
             var Result = tmpResult + renderInput;
             this.GetForm().append(Result);
-            tmpDataLength = tmpDataCollect.length;
-            for (tmpIdx = 0; tmpDataLength--; tmpIdx++) {
-                var tmpData = tmpDataCollect[tmpIdx];
-                $("#" + tmpData.inputID);
-            }
-            console.info(Template.TemplateOne, TSPractice0906.Data.TableContent.GetData());
+            console.info(Template.TemplateOne, TSPractice.Data.DataContent.GetData());
         };
         FormCreate.prototype.Update = function () {
         };
         return FormCreate;
     }());
-    TSPractice0906.FormCreate = FormCreate; //#endregion
-})(TSPractice0906 || (TSPractice0906 = {})); // End module TSPractice0906
-var MainData = new TSPractice0906.FormCreate();
+    TSPractice.FormCreate = FormCreate; //#endregion
+})(TSPractice || (TSPractice = {})); // End module TSPractice
+var MainData = new TSPractice.FormCreate();
 $(function () {
-    TSPractice0906.Template.Create();
+    TSPractice.Template.Create();
     var forNineNine = 99;
     var forData;
     for (forData = 0; forData <= forNineNine; forData++) {
-        TSPractice0906.Data.TableContent.AddData({ Name: "Test" + forData, Value: forData, ChxID: "ChxID" + forData, inputID: "inputID" + forData, spanID: "spanID" + forData });
+        TSPractice.Data.DataContent.AddData({ Name: "Test" + forData, Value: forData, ChxID: "ChxID" + forData, inputID: "inputID" + forData, spanID: "spanID" + forData });
     }
     MainData.Create();
 });

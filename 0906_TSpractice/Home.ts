@@ -1,6 +1,6 @@
 ﻿/// <reference path="scripts/typings/jquery/jquery.d.ts" />
 declare var Mustache: any;
-module TSPractice0906 {
+module TSPractice {
     export interface iTSPracticeMember {
         Name: string;
         Value: number;
@@ -19,7 +19,7 @@ module TSPractice0906 {
     }
     //#endregion
     //#region Data
-    export class TableContent {
+    export class DataContent {
         private Data: iTSPracticeMember[] = [];
         public AddData(p: iTSPracticeMember): void {
             this.Data.push(p);
@@ -29,7 +29,7 @@ module TSPractice0906 {
         }
     }
     export class Data {
-        public static TableContent: TableContent = new TableContent();   
+        public static DataContent: DataContent = new DataContent();   
     }
     //#endregion
     //#region Form
@@ -38,7 +38,7 @@ module TSPractice0906 {
         GetForm(): any { return this.m_Target; }
         Create(): void {
             this.m_Target = $("#Formdiv");
-            var tmpDataCollect: iTSPracticeMember[] = TSPractice0906.Data.TableContent.GetData();
+            var tmpDataCollect: iTSPracticeMember[] = TSPractice.Data.DataContent.GetData();
             var tmpDataLength: number = tmpDataCollect.length;
             var tmpIdx;
             var tmpResult = "";
@@ -50,29 +50,21 @@ module TSPractice0906 {
             var renderInput = Mustache.render(Template.TemplateInput, { inputID:'inputID1'})
             var Result = tmpResult + renderInput;
             this.GetForm().append(Result);
-
-            tmpDataLength = tmpDataCollect.length;
-            for (tmpIdx = 0; tmpDataLength--; tmpIdx++) {
-                var tmpData: iTSPracticeMember = tmpDataCollect[tmpIdx];
-                $("#" + tmpData.inputID )
-            }
-
-
-
-            console.info(Template.TemplateOne, TSPractice0906.Data.TableContent.GetData());
+       
+            console.info(Template.TemplateOne, TSPractice.Data.DataContent.GetData());
         }
         Update(): void {
         }
     }//#endregion
-}// End module TSPractice0906
+}// End module TSPractice
 
-var MainData: TSPractice0906.FormCreate = new TSPractice0906.FormCreate();
+var MainData: TSPractice.FormCreate = new TSPractice.FormCreate();
 $(function (): void {
-    TSPractice0906.Template.Create();
+    TSPractice.Template.Create();
     var forNineNine: number = 99;
     var forData: number;
     for (forData = 0; forData <= forNineNine; forData++) { 
-        TSPractice0906.Data.TableContent.AddData
+        TSPractice.Data.DataContent.AddData
             ({ Name: "Test" + forData, Value: forData, ChxID: "ChxID" + forData, inputID: "inputID" + forData , spanID:"spanID" + forData});
     }
     MainData.Create();
